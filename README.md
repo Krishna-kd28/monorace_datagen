@@ -41,6 +41,12 @@ This package is **data generation only**. The training and live-inference code
 (network, losses, PencilNet filter, weight conversion) is intentionally left
 out.
 
+> **Further reference:** the underlying MAV simulator has its own docs at
+> [`src/mav_simulator/README.md`](src/mav_simulator/README.md) — the X3
+> quadrotor model, `cmd_vel` control, RViz config, choosing worlds, and the
+> package layout. (This data-gen package reuses that simulator but spawns the
+> static `camera_rig` instead of the flying drone; see §8.)
+
 ---
 
 ## 2. Requirements

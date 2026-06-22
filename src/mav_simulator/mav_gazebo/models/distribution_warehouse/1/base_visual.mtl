@@ -1,0 +1,82 @@
+# Blender 4.5.6 LTS MTL File
+# www.blender.org
+
+newmtl Bumper.001
+Kd 1.000000 1.000000 1.000000
+map_Kd Bumper__Albedo.jpg
+
+newmtl Ceiling.001
+Kd 1.000000 1.000000 1.000000
+map_Kd Ceiling__Albedo.jpg
+
+newmtl Container.003
+Kd 1.000000 1.000000 1.000000
+map_Kd Container_Albedo.jpg
+
+newmtl ContainerFloor.001
+Kd 1.000000 1.000000 1.000000
+map_Kd ContainerFloor_Albedo.jpg
+
+newmtl Door.001
+Kd 1.000000 1.000000 1.000000
+map_Kd Door_Albedo.jpg
+
+newmtl Light.001
+Kd 1.000000 1.000000 1.000000
+map_Kd Light_LP_Light_AlbedoTransparency.jpg
+
+newmtl SlidingDoor.001
+Kd 1.000000 1.000000 1.000000
+map_Kd SlidingDoor_Albedo.jpg
+
+newmtl StairsMetal.001
+Kd 1.000000 1.000000 1.000000
+map_Kd StairsMetal_2_Albedo.jpg
+
+newmtl Wall.001
+Kd 1.000000 1.000000 1.000000
+map_Kd Wall_Albedo.jpg
+
+newmtl Floor.001
+Kd 1.000000 1.000000 1.000000
+map_Kd Floor_LP_FloorClean_AlbedoTransparency.jpg
+
+newmtl Rafters.001
+Kd 0.0 0.0 0.0
+Ks 0.05 0.05 0.05
+
+newmtl Column.001
+Kd 1.000000 1.000000 1.000000
+map_Kd Wall_Albedo.jpg
+
+newmtl Glass.001
+Kd 0.0 0.0 0.0
+Ks 0.05 0.05 0.05
+
+newmtl Black.001
+Kd 0.0 0.0 0.0
+Ks 0.05 0.05 0.05
+
+newmtl BlackPure.001
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+
+newmtl Blank.001
+Kd 1.000000 1.000000 1.000000
+map_Kd Wall_Albedo.jpg
+
+newmtl DoorBase.001
+Kd 0.25 0.25 0.25
+Ks 0.2 0.2 0.2
+
+newmtl Material.001
+Kd 0.0 0.0 0.0
+Ks 0.05 0.05 0.05
+
+newmtl Material.002
+Kd 0.0 0.0 0.0
+Ks 0.05 0.05 0.05
+
+newmtl Ramp.001
+Kd 1.000000 1.000000 1.000000
+map_Kd StairsMetal_2_Albedo.jpg

@@ -1,0 +1,11 @@
+# colcon build artifacts
+build/
+install/
+log/
+
+# python
+__pycache__/
+*.pyc
+
+# generated datasets
+pencilnet_dataset/

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sdf version="1.9">
+  <!--
+    Minimal camera rig for data generation.
+    Same camera mount pose and specs as the X3 drone, but with NO control
+    plugins, motors, or dynamics.  Used with physics type="ignored" so
+    set_pose + step(1) gives a clean render with zero drift.
+  -->
+  <model name="camera_rig">
+    <static>true</static>
+
+    <link name="X3/base_link">
+      <pose>0 0 0.053302 0 0 0</pose>
+      <inertial>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1e-04</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>1e-04</iyy><iyz>0</iyz>
+          <izz>1e-04</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <!-- Camera link: identical pose and sensors to X3/camera_link -->
+    <link name="X3/camera_link">
+      <pose>-0.0015 0.00604 0.0623 0.0 -0.523599 0.0</pose>
+      <inertial>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>1e-06</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>1e-06</iyy><iyz>0</iyz>
+          <izz>1e-06</izz>
+        </inertia>
+      </inertial>
+
+      <sensor name="camera" type="camera">
+        <camera>
+          <horizontal_fov>1.309</horizontal_fov>
+          <vertical_fov>1.0472</vertical_fov>
+          <image>
+            <width>1280</width>
+            <height>720</height>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>50</far>
+          </clip>
+          <distortion>
+            <k1>-0.25390268</k1>
+            <k2>0.06240127</k2>
+            <k3>0</k3>
+            <p1>-0.00113674</p1>
+            <p2>0.00213326</p2>
+          </distortion>
+          <!-- Triggered capture: data_generator_node pulses /camera_trigger
+               once per teleported viewpoint so RGB+depth render on the same
+               step (deterministic, no race). For continuous live streaming
+               instead, delete these two tags. -->
+          <triggered>true</triggered>
+          <trigger_topic>/camera_trigger</trigger_topic>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <topic>image_raw</topic>
+        <frame>X3/camera_link</frame>
+      </sensor>
+
+      <sensor name="depth_camera" type="depth_camera">
+        <camera>
+          <horizontal_fov>1.309</horizontal_fov>
+          <vertical_fov>1.0472</vertical_fov>
+          <image>
+            <width>1280</width>
+            <height>720</height>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>30</far>
+          </clip>
+          <!-- Triggered with the same /camera_trigger topic as the RGB
+               sensor, so one pulse fires both on the same step. Delete these
+               two tags for continuous live streaming. -->
+          <triggered>true</triggered>
+          <trigger_topic>/camera_trigger</trigger_topic>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <topic>depth_image</topic>
+        <frame>X3/camera_link</frame>
+      </sensor>
+    </link>
+
+    <joint name="camera_joint" type="fixed">
+      <parent>X3/base_link</parent>
+      <child>X3/camera_link</child>
+    </joint>
+
+    <!--
+      Ground-truth odometry. Publishes the rig's current world pose on the
+      Gazebo topic 'odom' (bridged to ROS as /X3/odom). Since the rig is
+      <static>true</static> nothing flies it; pose changes come from
+      `gz service .../set_pose` calls (e.g. dragging in the Gazebo GUI, the
+      data_generator_node, or a custom teleport script). Same message format
+      as the real X3 model's odometry.
+    -->
+    <plugin
+      filename="libignition-gazebo-odometry-publisher-system.so"
+      name="ignition::gazebo::systems::OdometryPublisher">
+      <odom_frame>odom</odom_frame>
+      <robot_base_frame>X3/base_link</robot_base_frame>
+      <odom_topic>odom</odom_topic>
+      <dimensions>3</dimensions>
+    </plugin>
+  </model>
+</sdf>

@@ -1,0 +1,20 @@
+# Parameters for the data_generator node.
+# Pass with:  ros2 run pencilnet_ros data_generator --ros-args --params-file <this file>
+# or override individually with -p name:=value
+data_generator:
+  ros__parameters:
+    # Where images/ and annotations.json are written.
+    output_dir: "~/pencilnet_dataset"
+
+    # Total number of camera viewpoints to sample (spread evenly across all
+    # gates and both approach sides). Each viewpoint that passes the
+    # visibility/labelling filters becomes one saved frame.
+    num_viewpoints: 15000
+
+    # Gazebo topic the node pulses to fire the triggered RGB+depth cameras.
+    # Must match <trigger_topic> in the camera_rig SDF.
+    trigger_topic: "/camera_trigger"
+
+    # If true, keep only the single closest gate per frame (else label every
+    # gate that passes the visibility filters).
+    closest_gate_only: false
